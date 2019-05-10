@@ -28,6 +28,7 @@ body {
   position: relative;
 }
 .people .person .photo img {
+  transition: all 1s ease-in;
   color: #2f4f4f;
   text-align: center;
   width: 200px;
@@ -43,6 +44,12 @@ body {
   position: absolute;
   right: 10px;
   top: 84px;
+}
+.people .person:hover img {
+  transition: all 1s ease-in;
+  border-radius: 60px;
+  width: 240px;
+  height: 240px;
 }
 
 @media all and (max-width: 1000px) {

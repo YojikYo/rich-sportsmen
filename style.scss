@@ -29,6 +29,7 @@ body {
     .photo {
       position: relative;
       img {
+        transition: all 1s ease-in;
         color: #2f4f4f;
         text-align: center;
         @include set_size(200px);
@@ -46,6 +47,13 @@ body {
       }
     }
 
+  }
+  .person:hover {
+    img {
+      transition: all 1s ease-in;
+      border-radius: 60px;
+      @include set_size(240px);
+    }
   }
 }
 
