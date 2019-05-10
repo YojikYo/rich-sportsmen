@@ -1,0 +1,54 @@
+* {
+  margin: 0;
+  font-family: Arial, monospace;
+}
+
+body {
+  padding: 15px;
+  display: flex;
+}
+
+.photo img,
+.rank {
+  border-radius: 50%;
+}
+
+.people {
+  margin: auto;
+  display: flex;
+  flex-flow: row wrap;
+  flex: 1 100%;
+}
+.people .person {
+  width: 200px;
+  height: 231px;
+  margin: 15px 15px 25px 15px;
+}
+.people .person .photo {
+  position: relative;
+}
+.people .person .photo img {
+  color: #2f4f4f;
+  text-align: center;
+  width: 200px;
+  height: 200px;
+}
+.people .person .photo .rank {
+  width: 32px;
+  height: 32px;
+  background: #fff;
+  font-size: 16px;
+  text-align: center;
+  line-height: 32px;
+  position: absolute;
+  right: 10px;
+  top: 84px;
+}
+
+@media all and (max-width: 1000px) {
+  .people {
+    width: 490px;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

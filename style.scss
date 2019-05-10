@@ -1,0 +1,56 @@
+@mixin set_size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+* {
+  margin: 0;
+  font-family: Arial, monospace;
+}
+
+body {
+  padding: 15px;
+  display: flex;
+}
+
+.photo img,
+.rank {
+  border-radius: 50%;
+}
+
+.people {
+  margin: auto;
+  display: flex;
+  flex-flow: row wrap;
+  flex: 1 100%;
+  .person {
+    @include set_size(200px, 231px);
+    margin: 15px 15px 25px 15px;
+    .photo {
+      position: relative;
+      img {
+        color: #2f4f4f;
+        text-align: center;
+        @include set_size(200px);
+      }
+      .rank {
+        $rank-size: 32px;
+        @include set_size($rank-size);
+        background: #fff;
+        font-size: 16px;
+        text-align: center;
+        line-height: $rank-size;
+        position: absolute;
+        right: 10px;
+        top: 84px;
+      }
+    }
+
+  }
+}
+
+@media all and (max-width: 1000px) {
+  .people {
+    width: 490px;
+  }
+}
