@@ -20,16 +20,19 @@ body {
 
 .people {
   margin: auto;
-  display: flex;
-  flex-flow: row wrap;
-  flex: 1 100%;
+  width: 100%;
+  min-width: 430px;
+  max-width: 890px;
+  display: grid;
+  grid-gap: 30px;
+  grid-template-columns: repeat(auto-fill, 200px);
   .person {
     @include set_size(200px, 231px);
     margin: 15px 15px 25px 15px;
     .photo {
       position: relative;
+      animation-name: hovered();
       img {
-        transition: all 1s ease-in;
         color: #2f4f4f;
         text-align: center;
         @include set_size(200px);
@@ -46,19 +49,47 @@ body {
         top: 84px;
       }
     }
-
+    .details {
+      font-size: 20px;
+      text-align: center;
+      color: #2f4f4f;
+      .extra {
+        visibility: hidden;
+        font-size: 21.6px;
+        line-height: 25px;
+        text-align: center;
+        color: #000000;
+      }
+    }
   }
   .person:hover {
-    img {
-      transition: all 1s ease-in;
-      border-radius: 60px;
-      @include set_size(240px);
+    animation-name: unhovered;
+  }
+}
+@mixin hovered($object,) {
+  @keyframes hovered_#{$object} {
+    from {
+      img {
+        border-radius: 60px;
+        @include set_size(240px);
+      }
+
+      figcaption {
+        font-size: 24px;
+      }
+
+      .person .extra {
+        font-size: 21.6px;
+        line-height: 25px;
+        visibility: visible;
+      }
+    }
+    to {
+
     }
   }
 }
 
-@media all and (max-width: 1000px) {
-  .people {
-    width: 490px;
-  }
+@keyframes unhovered {
+
 }
