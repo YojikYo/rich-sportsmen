@@ -1,6 +1,37 @@
+$people_class-name: people;
+$person_class-name: person;
+$photo_class-name: photo;
+$rank_class-name: rank;
+$person-name_class-name: name;
+$extra_class-name: extra;
+
+$photo_size: 200px;
+$photo_hovered-size: 240px;
+$rank-size: 32px;
+$name_margin-top: 8px;
+$person_height: 231px;
+$person_hover-width: 220px;
+
+@function get_delta-coordinate($from_width, $to_width) {
+  @return ($to_width - $from_width) / 2;
+}
+
+@mixin animation-for($class-name) {
+  animation-name: #{$class-name}_animate;
+}
+
 @mixin set_size($width, $height: $width) {
   width: $width;
   height: $height;
+}
+
+@mixin set-rank_position($rank_width: $rank-size, $photo_width: $photo_size) {
+  right: 10px;
+  top: ($photo_width - $rank_width) / 2;
+}
+
+@mixin move_to($start_size, $end_size) {
+  left: get_delta-coordinate($start_size, $end_size);
 }
 
 * {
@@ -9,87 +40,104 @@
 }
 
 body {
-  padding: 15px;
   display: flex;
 }
 
-.photo img,
-.rank {
+.#{$photo_class-name},
+.#{$rank_class-name} {
   border-radius: 50%;
 }
 
-.people {
-  margin: auto;
+.#{$people_class-name} {
+  margin: 0 auto auto;
+  padding: 30px 0 0;
   width: 100%;
   min-width: 430px;
   max-width: 890px;
   display: grid;
-  grid-gap: 30px;
-  grid-template-columns: repeat(auto-fill, 200px);
-  .person {
-    @include set_size(200px, 231px);
-    margin: 15px 15px 25px 15px;
-    .photo {
+  grid-gap: 40px 30px;
+  grid-template-columns: repeat(auto-fill, $photo_size);
+
+  .#{$person_class-name} {
+    position: relative;
+    transform: scale(1 / 1.2);
+    transition: transform 1s ease-in;
+    .photo-wrapper {
       position: relative;
-      animation-name: hovered();
-      img {
-        color: #2f4f4f;
-        text-align: center;
-        @include set_size(200px);
+
+      .#{$photo_class-name} {
+        margin: 0 0 8px;
+        @include set_size($photo_size);
+        transition: border-radius 600ms ease-out;
       }
-      .rank {
-        $rank-size: 32px;
+
+      .#{$rank_class-name} {
         @include set_size($rank-size);
         background: #fff;
         font-size: 16px;
         text-align: center;
         line-height: $rank-size;
+        color: #8b0000;
         position: absolute;
-        right: 10px;
-        top: 84px;
+        @include set-rank_position();
       }
     }
-    .details {
+
+    .#{$person-name_class-name} {
+      width: 100%;
       font-size: 20px;
-      text-align: center;
       color: #2f4f4f;
-      .extra {
-        visibility: hidden;
-        font-size: 21.6px;
-        line-height: 25px;
-        text-align: center;
-        color: #000000;
-      }
+      text-align: center;
     }
-  }
-  .person:hover {
-    animation-name: unhovered;
-  }
-}
-@mixin hovered($object,) {
-  @keyframes hovered_#{$object} {
-    from {
-      img {
-        border-radius: 60px;
-        @include set_size(240px);
-      }
 
-      figcaption {
-        font-size: 24px;
-      }
-
-      .person .extra {
-        font-size: 21.6px;
-        line-height: 25px;
-        visibility: visible;
-      }
+    .#{$extra_class-name} {
+      font-size: 18px;
+      text-align: center;
+      color: #000;
+      margin: 9px 0 16px;
+      display: none;
     }
-    to {
 
+    .sport:after {
+      content: ', ';
+    }
+
+    .pay:before {
+      content: to_upper_case('$');
+    }
+
+    .pay:after {
+      content: 'M';
     }
   }
 }
 
-@keyframes unhovered {
+.wrapper {
+  position: relative;
+  .#{$person_class-name}:hover {
+    z-index: 1;
+    $move_left\right: get_delta-coordinate($photo_size, $person_hover-width);
+    $move_top: $move_left\right;
+    position: absolute;
+    left: -1 * $move_left\right;
+    top: -1 * $move_top;
+    @include set_size($person_hover-width, min-content);
+    background: #eee;
+    border-radius: 10px;
+    transform: scale(1.2);
+    transition: transform 1s ease-in-out;
 
+    .photo-wrapper {
+      margin: $move_top $move_left\right 0;
+    }
+
+    .photo {
+      border-radius: 60px;
+      transition: border-radius 1s ease-in-out;
+    }
+
+    .#{$extra_class-name} {
+      display: block;
+    }
+  }
 }

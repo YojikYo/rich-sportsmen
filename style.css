@@ -1,17 +1,100 @@
-/* Error: Expected identifier.
- *    ,
- * 69 | @
- *    |  ^
- *    '
- *   style.scss 69:2  root stylesheet */
-
-body::before {
-  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
-      "Droid Sans Mono", monospace, monospace;
-  white-space: pre;
-  display: block;
-  padding: 1em;
-  margin-bottom: 1em;
-  border-bottom: 2px solid black;
-  content: "Error: Expected identifier.\a    \2577 \a 69 \2502  @\a    \2502   ^\a    \2575 \a   style.scss 69:2  root stylesheet";
+* {
+  margin: 0;
+  font-family: Arial, monospace;
 }
+
+body {
+  display: flex;
+}
+
+.photo,
+.rank {
+  border-radius: 50%;
+}
+
+.people {
+  margin: 0 auto auto;
+  padding: 30px 0 0;
+  width: 100%;
+  min-width: 430px;
+  max-width: 890px;
+  display: grid;
+  grid-gap: 40px 30px;
+  grid-template-columns: repeat(auto-fill, 200px);
+}
+.people .person {
+  position: relative;
+  transform: scale(1/1.2);
+  transition: transform 1s ease-in;
+}
+.people .person .photo-wrapper {
+  position: relative;
+}
+.people .person .photo-wrapper .photo {
+  margin: 0 0 8px;
+  width: 200px;
+  height: 200px;
+  transition: border-radius 600ms ease-out;
+}
+.people .person .photo-wrapper .rank {
+  width: 32px;
+  height: 32px;
+  background: #fff;
+  font-size: 16px;
+  text-align: center;
+  line-height: 32px;
+  color: #8b0000;
+  position: absolute;
+  right: 10px;
+  top: 84px;
+}
+.people .person .name {
+  width: 100%;
+  font-size: 20px;
+  color: #2f4f4f;
+  text-align: center;
+}
+.people .person .extra {
+  font-size: 18px;
+  text-align: center;
+  color: #000;
+  margin: 9px 0 16px;
+  display: none;
+}
+.people .person .sport:after {
+  content: ", ";
+}
+.people .person .pay:before {
+  content: "$";
+}
+.people .person .pay:after {
+  content: "M";
+}
+
+.wrapper {
+  position: relative;
+}
+.wrapper .person:hover {
+  z-index: 1;
+  position: absolute;
+  left: -10px;
+  top: -10px;
+  width: 220px;
+  height: min-content;
+  background: #eee;
+  border-radius: 10px;
+  transform: scale(1.2);
+  transition: transform 1s ease-in-out;
+}
+.wrapper .person:hover .photo-wrapper {
+  margin: 10px 10px 0;
+}
+.wrapper .person:hover .photo {
+  border-radius: 60px;
+  transition: border-radius 1s ease-in-out;
+}
+.wrapper .person:hover .extra {
+  display: block;
+}
+
+/*# sourceMappingURL=style.css.map */
